@@ -1,8 +1,11 @@
 
 
+import 'package:blackbeanbliss/models/user.dart';
 import 'package:blackbeanbliss/screens/authenticate/authenticate.dart';
 import 'package:blackbeanbliss/screens/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -10,7 +13,14 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final user = Provider.of<User?>(context);
+    
+
     // return either Home or Authenticate widget
-    return Authenticate();
+    if (user == null) {
+      return Authenticate();
+    } else {
+      return Home();
+    }
   }
 }

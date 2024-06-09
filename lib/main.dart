@@ -1,6 +1,9 @@
+import 'package:blackbeanbliss/models/user.dart';
+import 'package:blackbeanbliss/services/auth.dart';
 import 'package:blackbeanbliss/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,11 +14,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Wrapper(),
+    return StreamProvider<User?>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: const MaterialApp(
+        home: Wrapper(),
+        debugShowCheckedModeBanner: false,  // Menonaktifkan banner debug
+      ),
     );
   }
 }

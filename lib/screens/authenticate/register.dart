@@ -13,11 +13,14 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   // Text Field State
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +41,17 @@ class _RegisterState extends State<Register> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: <Widget>[
               const SizedBox(height: 20.0),
               TextFormField(
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter an Email';
+                  }
+                  return null;
+                },
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -49,6 +59,15 @@ class _RegisterState extends State<Register> {
               const SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter a Password';
+                  }
+                  if (val.length < 8) {
+                    return 'Password must be at least 8 characters long';
+                  }
+                  return null;
+                },
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -63,11 +82,19 @@ class _RegisterState extends State<Register> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  // Implementasi logika sign-in asinkron
-                  print(email);
-                  print(password);
+                  if (_formKey.currentState?.validate() ?? false) {
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                    if (result == null){
+                      setState(() => error = 'Please supply a valid email');
+                    }
+                  }
                 },
               ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              )
             ],
           ),
         ),

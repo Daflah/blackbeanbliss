@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "567117493827",
+    "project_id": "blackbeanbliss-3e2e4",
+    "storage_bucket": "blackbeanbliss-3e2e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567117493827:android:0cf5fe5d50aaeeb034c6f6",
+        "android_client_info": {
+          "package_name": "com.example.blackbeanbliss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVUvFDJVR0rdFK6dwUxSqU6-QxnYIhBMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

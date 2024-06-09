@@ -1,19 +1,18 @@
 import 'package:blackbeanbliss/services/auth.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
-  // Konstruktor Sign in
-  const SignIn({Key? key, required this.toggleView}) : super(key: key);
+class Register extends StatefulWidget {
+  // Konstruktor Register
+  const Register({Key? key, required this.toggleView}) : super(key: key);
 
   // Fungsi toggleView yang akan diteruskan dari widget induk
   final void Function() toggleView;
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
 
   // Text Field State
@@ -27,12 +26,12 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: const Text('Sign in to Black Bean Bliss'),
+        title: const Text('Sign up to Black Bean Bliss'),
         actions: <Widget>[
           TextButton.icon(
             icon: const Icon(Icons.person),
-            label: const Text('Register'),
-            onPressed: widget.toggleView, 
+            label: const Text('Sign In'),
+            onPressed: widget.toggleView, // Memanggil fungsi toggleView dari widget induk
           )
         ],
       ),
@@ -57,10 +56,10 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.pink[400], // Warna latar belakang tombol
+                  backgroundColor: Colors.pink[400], // Warna latar belakang tombol
                 ),
                 child: const Text(
-                  'Sign In',
+                  'Register',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {

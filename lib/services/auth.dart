@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:blackbeanbliss/models/user.dart';
+import 'package:blackbeanbliss/services/database.dart';  // Pastikan ini telah diimpor
 import 'package:firebase_core/firebase_core.dart';
 
 class AuthService {
@@ -44,7 +45,14 @@ class AuthService {
     try {
       auth.UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       auth.User? user = result.user;
-      return _userFromFirebaseUser(user);
+
+      // Create a new document for the user with the uid
+      if (user != null) {
+        await DatabaseService(uid: user.uid).updateUserData('0', 'New BBB Member', 100);
+        return _userFromFirebaseUser(user);
+      } else {
+        return null;
+      }
     } catch(e) {
       print(e.toString());
       return null;

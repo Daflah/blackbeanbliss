@@ -15,10 +15,12 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
 
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   // Text Field State
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +41,17 @@ class _SignInState extends State<SignIn> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: <Widget>[
               const SizedBox(height: 20.0),
               TextFormField(
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter an Email';
+                  }
+                  return null;
+                },
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -50,6 +59,15 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter a Password';
+                  }
+                  if (val.length < 8) {
+                    return 'Password must be at least 8 characters long';
+                  }
+                  return null;
+                },
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -57,18 +75,26 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.pink[400], // Warna latar belakang tombol
+                  backgroundColor: Colors.pink[400], // Warna latar belakang tombol
                 ),
                 child: const Text(
                   'Sign In',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
-                  // Implementasi logika sign-in asinkron
-                  print(email);
-                  print(password);
+                  if (_formKey.currentState?.validate() ?? false) {
+                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    if (result == null){
+                      setState(() => error = 'Could not sign in with those credentials');
+                    }
+                  }
                 },
               ),
+              SizedBox(height: 12.0),
+              Text(
+                error,
+                style: TextStyle(color: Colors.red, fontSize: 14.0),
+              )
             ],
           ),
         ),

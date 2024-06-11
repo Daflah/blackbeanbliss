@@ -1,6 +1,7 @@
 import 'package:blackbeanbliss/models/brew.dart';
 import 'package:blackbeanbliss/models/user.dart';
 import 'package:blackbeanbliss/screens/home/brew_list.dart';
+import 'package:blackbeanbliss/screens/home/settings_form.dart';
 import 'package:blackbeanbliss/services/auth.dart';
 import 'package:blackbeanbliss/services/database.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class Home extends StatelessWidget {
       showModalBottomSheet(context: context, builder: (context) {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: Text('bottom sheet'),
+          child: SettingsForm(),
         );
       });
     }
@@ -60,7 +61,15 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: BrewList(),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/coffee_bg.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: BrewList()
+        ),
       ),
     );
   }

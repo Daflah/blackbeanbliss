@@ -289,7 +289,7 @@ void navigateToSignatureDetails(int index) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 86, 112, 126),
+      backgroundColor: Colors.brown[800],
       appBar: AppBar(
         actions: [
           IconButton(
@@ -299,7 +299,7 @@ void navigateToSignatureDetails(int index) {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/cartpage');
+              Navigator.pushNamed(context, '/home');
             },
             icon: const Icon(Icons.shopping_cart),
             color: Colors.white,
@@ -312,7 +312,7 @@ void navigateToSignatureDetails(int index) {
           color: Colors.white,
         ),
         title: const Text(
-          'W.W.E',
+          'B.B.B',
           style: TextStyle(color: Colors.white),
         ),
       ),

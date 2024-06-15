@@ -1,6 +1,7 @@
 import 'package:blackbeanbliss/services/auth.dart';
 import 'package:blackbeanbliss/shared/constants.dart';
 import 'package:blackbeanbliss/shared/loading.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,6 +18,8 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
 
   String email = '';
   String password = '';
@@ -34,10 +37,10 @@ class _RegisterState extends State<Register> {
               child: Column(
                 children: <Widget>[
                   Image.asset(
-                    'images/logokita.png', // Ganti dengan path logo kamu
-                    height: 120.0, // Membesarkan logo sedikit
+                    'images/logokita.png', // Replace with your logo path
+                    height: 150.0,
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   Text(
                     "Let's create an account for you!",
                     style: GoogleFonts.dmSerifDisplay(
@@ -45,7 +48,7 @@ class _RegisterState extends State<Register> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 50.0),
                   Container(
                     padding: const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
@@ -65,18 +68,41 @@ class _RegisterState extends State<Register> {
                           ),
                           const SizedBox(height: 20.0),
                           TextFormField(
-                            decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                            obscureText: true,
-                            validator: (val) =>
-                                val!.length < 8 ? 'Password must be at least 8 characters long' : null,
+                            decoration: textInputDecoration.copyWith(
+                              hintText: 'Password',
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                            obscureText: !_passwordVisible,
+                            validator: (val) => val!.length < 8 ? 'Password must be at least 8 characters long' : null,
                             onChanged: (val) {
                               setState(() => password = val);
                             },
                           ),
                           const SizedBox(height: 20.0),
                           TextFormField(
-                            decoration: textInputDecoration.copyWith(hintText: 'Confirm Password'),
-                            obscureText: true,
+                            decoration: textInputDecoration.copyWith(
+                              hintText: 'Confirm Password',
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _confirmPasswordVisible = !_confirmPasswordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                            obscureText: !_confirmPasswordVisible,
                             validator: (val) {
                               if (val!.isEmpty) {
                                 return 'Enter confirm password';
@@ -110,7 +136,7 @@ class _RegisterState extends State<Register> {
                                     loading = false;
                                   });
                                 } else {
-                                  // After successful registration, navigate to Home page
+                                  // Navigate to Home after successful registration
                                   Navigator.of(context).popUntil((route) => route.isFirst);
                                 }
                               }
@@ -121,22 +147,24 @@ class _RegisterState extends State<Register> {
                             error,
                             style: const TextStyle(color: Colors.red, fontSize: 14.0),
                           ),
-                          const SizedBox(height: 12.0),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Already have an account? ',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              GestureDetector(
-                                onTap: widget.toggleView,
-                                child: const Text(
-                                  'Login now',
-                                  style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                          const SizedBox(height: 20.0),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Already have an account? ',
+                                  style: GoogleFonts.dmSerifDisplay(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                            ],
+                                TextSpan(
+                                  text: 'Login now',
+                                  style: const TextStyle(color: Colors.blue),
+                                  recognizer: TapGestureRecognizer()..onTap = widget.toggleView,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:blackbeanbliss/services/auth.dart';
 import 'package:blackbeanbliss/shared/constants.dart';
 import 'package:blackbeanbliss/shared/loading.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key, required this.toggleView}) : super(key: key);
@@ -18,6 +20,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool _passwordVisible = false;
 
   String email = '';
   String password = '';
@@ -30,11 +33,22 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             body: Stack(
               children: [
-                // Background color
+                // Background image with blur
                 Container(
-                  color: Colors.brown[200], // Ganti warna latar belakang sesuai keinginan Anda
                   width: double.infinity,
                   height: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('images/bekopi.jpg'), // Replace with your background image path
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0), // Adjust blur intensity here
+                    child: Container(
+                      color: Colors.black.withOpacity(0.1),
+                    ),
+                  ),
                 ),
                 SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
@@ -43,10 +57,10 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        const SizedBox(height: 40.0),
+                        const SizedBox(height: 25.0),
                         Image.asset(
-                          'images/logokita.png', // Ganti dengan path logo kamu
-                          height: 120.0, // Membesarkan logo sedikit
+                          'images/logokita.png', // Replace with your logo path
+                          height: 160.0,
                         ),
                         const SizedBox(height: 15.0),
                         Text(
@@ -57,7 +71,7 @@ class _SignInState extends State<SignIn> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 40.0),
+                        const SizedBox(height: 70.0),
                         Container(
                           padding: const EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
@@ -75,10 +89,21 @@ class _SignInState extends State<SignIn> {
                               ),
                               const SizedBox(height: 20.0),
                               TextFormField(
-                                decoration: textInputDecoration.copyWith(hintText: 'Password'),
-                                obscureText: true,
-                                validator: (val) =>
-                                    val!.length < 8 ? 'Password must be at least 8 characters long' : null,
+                                decoration: textInputDecoration.copyWith(
+                                  hintText: 'Password',
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _passwordVisible = !_passwordVisible;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                obscureText: !_passwordVisible,
+                                validator: (val) => val!.length < 8 ? 'Password must be at least 8 characters long' : null,
                                 onChanged: (val) {
                                   setState(() => password = val);
                                 },
@@ -87,7 +112,7 @@ class _SignInState extends State<SignIn> {
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.brown[400],
-                                  minimumSize: Size(double.infinity, 50), // Memperbesar ukuran tombol
+                                  minimumSize: Size(double.infinity, 50), // Button size
                                 ),
                                 child: const Text(
                                   'Sign In',
@@ -103,7 +128,7 @@ class _SignInState extends State<SignIn> {
                                         loading = false;
                                       });
                                     } else {
-                                      // Setelah berhasil login, pindah ke halaman Home
+                                      // Navigate to Home after successful login
                                       Navigator.of(context).popUntil((route) => route.isFirst);
                                     }
                                   }
@@ -114,24 +139,24 @@ class _SignInState extends State<SignIn> {
                                 error,
                                 style: const TextStyle(color: Colors.red, fontSize: 14.0),
                               ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 40.0), // Jarak tambahan sebelum teks "Not a member? Register now"
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Not a member? ',
-                                style: GoogleFonts.dmSerifDisplay(
-                                  fontSize: 16,
-                                  color: Colors.white,
+                              const SizedBox(height: 20.0),
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Not a member? ',
+                                      style: GoogleFonts.dmSerifDisplay(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'Register now',
+                                      style: const TextStyle(color: Colors.blue),
+                                      recognizer: TapGestureRecognizer()..onTap = widget.toggleView,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              TextSpan(
-                                text: 'Register now',
-                                style: const TextStyle(color: Colors.blue),
-                                recognizer: TapGestureRecognizer()..onTap = widget.toggleView,
                               ),
                             ],
                           ),

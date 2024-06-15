@@ -4,22 +4,23 @@ import '../models/food.dart';
 
 class FoodTile extends StatelessWidget {
   final Food food;
-  final void Function()? onTap; 
+  final VoidCallback onTap;
+
   const FoodTile({
-    super.key,
+    Key? key,
     required this.food,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap ,
+      onTap: onTap,
       child: Container(
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: const Color.fromARGB(255, 163, 110, 110),
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.only(left: 12, right: 12),
@@ -27,52 +28,57 @@ class FoodTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //image
+            // Image
             Image.asset(
               food.imagePath,
               height: 140,
             ),
-    
-            //Text
+
+            const SizedBox(height: 10),
+
+            // Text
             Text(
               food.name,
               style: GoogleFonts.dmSerifDisplay(fontSize: 20),
             ),
-    
-            //Price + Rating
+
+            const SizedBox(height: 10),
+
+            // Price + Rating
             SizedBox(
               width: 160,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  //Price
+                  // Price
                   Text(
-                    '\Rp' + food.price, 
+                    'Rp ${food.price}', // Format harga
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      color: Colors.grey[700]
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[700],
                     ),
                   ),
-    
-                  //rating
+
+                  // Rating
                   Row(
                     children: [
                       Icon(
-                    Icons.star,
-                    color: Colors.yellow[800],
-                  ),
-                  Text(
-                    food.rating, 
-                    style: TextStyle(color: Colors.grey),
-                  ),
+                        Icons.star,
+                        color: Colors.yellow[800],
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        food.rating,
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
-     ),
+      ),
     );
   }
 }

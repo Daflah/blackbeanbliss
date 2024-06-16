@@ -1,8 +1,10 @@
+import 'package:blackbeanbliss/components/category_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../components/food_tile.dart';
 import '../components/drink_tile.dart';
@@ -25,6 +27,8 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  MenuCategory selectedCategory = MenuCategory.All;
+
   final List<Signature> signatureMenu = [
     Signature(
       name: "Wagyu Beef Dry Aged x WWE",
@@ -137,134 +141,15 @@ class _MenuPageState extends State<MenuPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
-
-            // Promo banner
-            Container(
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 255, 17, 0),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              margin: const EdgeInsets.symmetric(horizontal: 25),
-              padding: const EdgeInsets.all(25),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/coffeegif.gif', // Path to your GIF file
-                    height: 50,
-                    width: 50,
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: Text(
-                      'Get 40% Promo',
-                      style: GoogleFonts.dmSerifDisplay(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  MyButton(
-                    text: "Redeem",
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => AlertDialog(
-                          backgroundColor: Colors.red,
-                          content: const Text(
-                            "You have redeemed the promo!",
-                            style: TextStyle(color: Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                          actions: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.done),
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            // Special offer image and text
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 12),
-                  Image.asset(
-                    'images/coffeegif.gif', // Path to your GIF file
-                    height: 90,
-                    width: 90,
-                  ),
-                  const SizedBox(width: 20),
-                  const Text(
-                    'Best Under-Deals!',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 5),
-
-            // location bar
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 21, vertical: 10),
-                padding: const EdgeInsets.all(21),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 5),
-                    const FaIcon(
-                      FontAwesomeIcons.mapLocationDot,
-                      color: Color(0xFFf60909),
-                    ),
-                    const SizedBox(width: 10),
-                    const Text(
-                      'Visit Our Location',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    const SizedBox(width: 6),
-                    MyButton(
-                      text: "Visit",
-                      onTap: () {
-                        Navigator.pushNamed(context, '/location');
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
 
             // Search bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.5),
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(20),
@@ -277,49 +162,18 @@ class _MenuPageState extends State<MenuPage> {
                     borderSide: const BorderSide(color: Colors.white),
                     borderRadius: BorderRadius.circular(20),
                   ),
+                  suffixIcon: Icon(Icons.search, color: Colors.white),
                 ),
-              ),
-            ),
-
-            const SizedBox(height: 50),
-
-            // Food menu header
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "Food Menu",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            // Food menu list
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _foodMenu.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => navigateToFoodDetails(index),
-                    child: FoodTile(food: _foodMenu[index], onTap: () => navigateToFoodDetails(index)),
-                  );
-                },
               ),
             ),
 
             const SizedBox(height: 20),
 
-            // Drink menu header
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
+            // Promo Carousel
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
-                "Drink Menu",
+                "Promo for you",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -327,55 +181,202 @@ class _MenuPageState extends State<MenuPage> {
                 ),
               ),
             ),
-
             const SizedBox(height: 10),
-
-            // Drink menu list
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: drinkMenu.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => navigateToDrinkDetails(index),
-                    child: DrinkTile(drink: drinkMenu[index], onTap: () => navigateToDrinkDetails(index)),
-                  );
-                },
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 200.0,
+                autoPlay: true,
+                enlargeCenterPage: true,
               ),
+              items: [
+                'images/bekopi.jpg',
+                'images/d_taro_milkshake.jpg',
+                'images/d_vanilla_milkshake.jpg',
+              ].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage(i),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
-            // Signature menu header
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
-              child: Text(
-                "Signature Menu",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+            // Category Buttons
+            Container(
+            height: 50,
+            margin: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                CategoryButton(
+                  text: "All",
+                  isSelected: selectedCategory == MenuCategory.All,
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = MenuCategory.All;
+                    });
+                  },
                 ),
-              ),
+                CategoryButton(
+                  text: "Hot Coffee",
+                  isSelected: selectedCategory == MenuCategory.HotCoffee,
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = MenuCategory.HotCoffee;
+                    });
+                  },
+                ),
+                CategoryButton(
+                  text: "Cold Coffee",
+                  isSelected: selectedCategory == MenuCategory.ColdCoffee,
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = MenuCategory.ColdCoffee;
+                    });
+                  },
+                ),
+                CategoryButton(
+                  text: "Signature Coffee",
+                  isSelected: selectedCategory == MenuCategory.SignatureCoffee,
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = MenuCategory.SignatureCoffee;
+                    });
+                  },
+                ),
+              ],
             ),
+          ),
 
-            const SizedBox(height: 10),
 
-            // Signature menu list
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: signatureMenu.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => navigateToSignatureDetails(index),
-                    child: SignatureTile(signature: signatureMenu[index], onTap: () => navigateToSignatureDetails(index)),
-                  );
-                },
+            const SizedBox(height: 40),
+
+            // Menu Lists
+            if (selectedCategory == MenuCategory.All ||
+                selectedCategory == MenuCategory.HotCoffee)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Hot coffee menu header
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Text(
+                      "Hot Coffee",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _foodMenu.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => navigateToFoodDetails(index),
+                          child: FoodTile(
+                            food: _foodMenu[index],
+                            onTap: () => navigateToFoodDetails(index),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
-            ),
+
+            if (selectedCategory == MenuCategory.All ||
+                selectedCategory == MenuCategory.ColdCoffee)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Cold coffee menu header
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Text(
+                      "Cold Coffee",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: drinkMenu.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => navigateToDrinkDetails(index),
+                          child: DrinkTile(
+                            drink: drinkMenu[index],
+                            onTap: () => navigateToDrinkDetails(index),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+
+            if (selectedCategory == MenuCategory.All ||
+                selectedCategory == MenuCategory.SignatureCoffee)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Signature coffee menu header
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Text(
+                      "Signature Coffee",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: signatureMenu.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => navigateToSignatureDetails(index),
+                          child: SignatureTile(
+                            signature: signatureMenu[index],
+                            onTap: () => navigateToSignatureDetails(index),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
           ],
         ),
       ),

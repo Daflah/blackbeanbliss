@@ -71,6 +71,13 @@ flutter:
   assets:
     - assets/
     - images/
+    - images/location/
+    - images/barcode/
+    - images/background/
+    - images/promotions/
+    - images/hot_coffe/
+    - images/cold_coffe/
+    - images/signature_coffe/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

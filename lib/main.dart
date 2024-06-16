@@ -1,5 +1,6 @@
 import 'package:blackbeanbliss/models/user.dart';
 import 'package:blackbeanbliss/pages/intro_page.dart';
+import 'package:blackbeanbliss/pages/location_page.dart';
 import 'package:blackbeanbliss/screens/authenticate/authenticate.dart';
 import 'package:blackbeanbliss/screens/home/home.dart';
 import 'package:blackbeanbliss/services/auth.dart';
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> {
           '/intro': (context) => IntroPage(),
           '/authpage': (context) => Authenticate(),
           '/home': (context) => Home(),
+          '/location': (context) => LocationPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

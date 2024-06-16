@@ -33,22 +33,11 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             body: Stack(
               children: [
-                // Background image with blur
+                // Solid background color
                 Container(
                   width: double.infinity,
                   height: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('images/bekopi.jpg'), // Replace with your background image path
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0), // Adjust blur intensity here
-                    child: Container(
-                      color: Colors.black.withOpacity(0.1),
-                    ),
-                  ),
+                  color: Colors.brown[700], // Replace with your preferred background color
                 ),
                 SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
@@ -59,7 +48,7 @@ class _SignInState extends State<SignIn> {
                       children: <Widget>[
                         const SizedBox(height: 25.0),
                         Image.asset(
-                          'images/logokita.png', // Replace with your logo path
+                          'images/logocofferemovebg.png', // Replace with your logo path
                           height: 160.0,
                         ),
                         const SizedBox(height: 15.0),

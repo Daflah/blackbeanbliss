@@ -16,24 +16,24 @@ class _IntroPageState extends State<IntroPage> {
     {
       "image": 'images/introkopi1.png',
       "title": "Black",
-      "subtitle": "Nikmati sensasi kopi hitam asli yang kaya akan rasa."
+      "subtitle": "Experience the rich, bold taste of authentic black coffee."
     },
     {
       "image": 'images/introkopi2.png',
       "title": "Bean",
-      "subtitle": "Campuran sempurna antara kopi dan susu untuk hari yang lebih baik."
+      "subtitle": "The perfect blend of coffee and milk for a better day."
     },
     {
       "image": 'images/introkopi3.png',
       "title": "Bliss",
-      "subtitle": "Kreasi kopi unik untuk pecinta kopi sejati di semua kalangan umur."
+      "subtitle": "Unique coffee creations for coffee enthusiasts of all ages."
     },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[200], // Ubah warna background menjadi coklat
+      backgroundColor: Colors.brown[700], // Ubah warna background menjadi coklat
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(

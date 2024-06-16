@@ -193,7 +193,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                     color: Colors.white,
                     child: isBarcodeVisible
                         ? Image.asset(
-                            'images/barcode1.jpg', // Sesuaikan dengan path gambar barcode
+                            'images/barcode/barcode1.jpg', // Sesuaikan dengan path gambar barcode
                             width: double.infinity,
                             fit: BoxFit.contain, // Menyesuaikan gambar agar tidak terpotong
                           )

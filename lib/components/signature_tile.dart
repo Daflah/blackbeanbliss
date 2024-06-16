@@ -19,7 +19,7 @@ class SignatureTile extends StatelessWidget {
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: Color(0xFFFFEBCD),
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.only(left: 12, right: 12),
@@ -50,7 +50,7 @@ class SignatureTile extends StatelessWidget {
                     '\Rp' + signature.price, 
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
-                      color: Colors.grey[700]
+                      color: Colors.black
                     ),
                   ),
     
@@ -63,7 +63,7 @@ class SignatureTile extends StatelessWidget {
                   ),
                   Text(
                     signature.rating, 
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.black),
                   ),
                     ],
                   )

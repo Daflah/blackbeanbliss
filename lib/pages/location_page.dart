@@ -56,8 +56,16 @@ class _LocationPageState extends State<LocationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locations'),
-        backgroundColor: Colors.brown[800],
+        title: Text(
+          'Locations',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.brown[700],
+        iconTheme: IconThemeData(
+          color: Colors.white, // Set the color of the back arrow to white
+        ),
       ),
       body: Container(
         color: Colors.brown[700],
@@ -70,7 +78,7 @@ class _LocationPageState extends State<LocationPage> {
                 margin: EdgeInsets.only(bottom: 16.0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                 decoration: BoxDecoration(
-                  color: Colors.brown[200],
+                  color: Color(0xFFFFEBCD),
                   borderRadius: BorderRadius.circular(8.0),
                   boxShadow: [
                     BoxShadow(

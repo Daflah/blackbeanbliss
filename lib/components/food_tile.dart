@@ -20,7 +20,7 @@ class FoodTile extends StatelessWidget {
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 163, 110, 110),
+          color: Color(0xFFFFEBCD),
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.only(left: 12, right: 12),
@@ -55,7 +55,7 @@ class FoodTile extends StatelessWidget {
                     'Rp ${food.price}', // Format harga
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey[700],
+                      color: Colors.black,
                     ),
                   ),
 
@@ -69,7 +69,7 @@ class FoodTile extends StatelessWidget {
                       const SizedBox(width: 5),
                       Text(
                         food.rating,
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   ),

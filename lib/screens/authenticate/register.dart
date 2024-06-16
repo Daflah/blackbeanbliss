@@ -31,13 +31,13 @@ class _RegisterState extends State<Register> {
     return loading
         ? const Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[200],
+            backgroundColor: Colors.brown[700],
             body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
               child: Column(
                 children: <Widget>[
                   Image.asset(
-                    'images/logokita.png', // Replace with your logo path
+                    'images/logocofferemovebg.png', // Replace with your logo path
                     height: 150.0,
                   ),
                   const SizedBox(height: 15.0),

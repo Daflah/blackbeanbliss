@@ -14,65 +14,72 @@ class DrinkTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap ,
+      onTap: onTap,
       child: Container(
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: Colors.grey[100],
+          color: Colors.brown[500],
           borderRadius: BorderRadius.circular(20),
         ),
-        margin: const EdgeInsets.only(left: 12, bottom: 25, right: 12),
+        margin: const EdgeInsets.only(left: 12, right: 12),
         padding: const EdgeInsets.all(25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //image
+            // Image
             Image.asset(
               drink.imagePath,
               height: 140,
             ),
-    
-            //Text
+
+            const SizedBox(height: 10),
+
+            // Text
             Text(
               drink.name,
-              style: GoogleFonts.dmSerifDisplay(fontSize: 20),
+              style: GoogleFonts.dmSerifDisplay(
+                fontSize: 20,
+                color: Colors.white, // Set the text color to white
+              ),
             ),
-    
-            //Price + Rating
+
+            const SizedBox(height: 10),
+
+            // Price + Rating
             SizedBox(
               width: 160,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  //Price
+                  // Price
                   Text(
-                    '\Rp' + drink.price, 
+                    '\Rp' + drink.price,
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      color: Colors.grey[700]
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-    
-                  //rating
+
+                  // Rating
                   Row(
                     children: [
                       Icon(
-                    Icons.star,
-                    color: Colors.yellow[800],
-                  ),
-                  Text(
-                    drink.rating, 
-                    style: TextStyle(color: Colors.grey),
-                  ),
+                        Icons.star,
+                        color: Colors.yellow[800],
+                      ),
+                      Text(
+                        drink.rating,
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
-     ),
+      ),
     );
   }
 }

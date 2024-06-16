@@ -43,20 +43,22 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Bean Crew'),
+          title: Text(
+            'B.B.B Crew',
+            style: TextStyle(color: Colors.white), // Mengubah warna teks menjadi putih
+          ),
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
+          iconTheme: IconThemeData(
+            color: Colors.white, // Mengubah warna ikon panah back menjadi putih
+          ),
           actions: <Widget>[
             TextButton.icon(
-              icon: const Icon(Icons.person, color: Colors.white),
-              label: const Text('Logout', style: TextStyle(color: Colors.white)),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            ),
-            TextButton.icon(
-              icon: Icon(Icons.settings),
-              label: Text('Settings'),
+              icon: Icon(Icons.local_drink, color: Colors.white), // Ikon berwarna putih
+              label: Text(
+                'Preferences',
+                style: TextStyle(color: Colors.white), // Teks berwarna putih
+              ),
               onPressed: () => _showSettingsPanel(),
             )
           ],
@@ -64,7 +66,7 @@ class Home extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/coffee_bg.png'),
+              image: AssetImage('images/background/bekopi.jpg'),
               fit: BoxFit.cover,
             ),
           ),

@@ -1,6 +1,7 @@
 
 
 import 'package:blackbeanbliss/models/user.dart';
+import 'package:blackbeanbliss/pages/menu_pages.dart';
 import 'package:blackbeanbliss/screens/authenticate/authenticate.dart';
 import 'package:blackbeanbliss/screens/home/home.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return MenuPage();
     }
   }
 }

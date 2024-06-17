@@ -47,7 +47,7 @@ class Home extends StatelessWidget {
             'B.B.B Crew',
             style: TextStyle(color: Colors.white), // Mengubah warna teks menjadi putih
           ),
-          backgroundColor: Colors.brown[400],
+          backgroundColor: Colors.brown[700],
           elevation: 0.0,
           iconTheme: IconThemeData(
             color: Colors.white, // Mengubah warna ikon panah back menjadi putih

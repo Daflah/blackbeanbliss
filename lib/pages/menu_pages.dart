@@ -1,15 +1,11 @@
 import 'package:blackbeanbliss/components/category_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../components/food_tile.dart';
 import '../components/drink_tile.dart';
 import '../components/signature_tile.dart';
-import '../components/button.dart';
 import '../models/drink.dart';
 import '../models/food.dart';
 import '../models/signature.dart';
@@ -437,7 +433,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                 ],
               ),
 
@@ -475,7 +471,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                 ],
               ),
 
@@ -513,7 +509,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 50),
                 ],
               ),
           ],

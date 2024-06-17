@@ -43,7 +43,7 @@ class _LocationPageState extends State<LocationPage> {
         'name': 'Black Bean Bliss Yogyakarta',
         'description': 'Experience our cozy atmosphere and aromatic coffees that will delight your senses.',
         'address': 'Jl. KH. Ahmad Dahlan 126-108, Notoprajan, Ngampilan, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55262',
-        'rating': '3.8'
+        'rating': '4.6'
       },
       {
         'image': 'images/location/coffelocation5.jpg',
@@ -56,8 +56,16 @@ class _LocationPageState extends State<LocationPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Locations'),
-        backgroundColor: Colors.brown[800],
+        title: Text(
+          'Locations',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.brown[700],
+        iconTheme: IconThemeData(
+          color: Colors.white, // Set the color of the back arrow to white
+        ),
       ),
       body: Container(
         color: Colors.brown[700],
@@ -70,7 +78,7 @@ class _LocationPageState extends State<LocationPage> {
                 margin: EdgeInsets.only(bottom: 16.0),
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                 decoration: BoxDecoration(
-                  color: Colors.brown[200],
+                  color: Color(0xFFFFEBCD),
                   borderRadius: BorderRadius.circular(8.0),
                   boxShadow: [
                     BoxShadow(
@@ -123,11 +131,11 @@ class _LocationPageState extends State<LocationPage> {
                             SizedBox(height: 8),
                             Row(
                               children: [
-                                Icon(Icons.star, color: Colors.yellow),
-                                Icon(Icons.star, color: Colors.yellow),
-                                Icon(Icons.star, color: Colors.yellow),
-                                Icon(Icons.star, color: Colors.yellow),
-                                Icon(Icons.star_half, color: Colors.yellow),
+                                Icon(Icons.star, color: Colors.brown[900]),
+                                Icon(Icons.star, color: Colors.brown[900]),
+                                Icon(Icons.star, color: Colors.brown[900]),
+                                Icon(Icons.star, color: Colors.brown[900]),
+                                Icon(Icons.star_half, color: Colors.brown[900]),
                                 SizedBox(width: 8),
                                 Text('${locations[index]['rating']}/5', style: TextStyle(fontSize: 16, color: Colors.brown[900])),
                               ],

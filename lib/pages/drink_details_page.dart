@@ -1,7 +1,6 @@
 // Import packages yang diperlukan
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:blackbeanbliss/models/shop.dart'; // Ganti dengan path yang sesuai
 import '../models/drink.dart'; // Ganti dengan path yang sesuai
 
 // Widget untuk halaman detail minuman
@@ -32,9 +31,9 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-      backgroundColor: Colors.pink[50],
+      backgroundColor: Colors.brown[700],
       body: Column(
         children: [
           // ListView untuk detail minuman
@@ -47,7 +46,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0xFFFFEBCD),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -126,10 +125,10 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                   const SizedBox(height: 25),
 
                   // Deskripsi
-                  const Text(
+                  Text(
                     "About Products",
-                    style: TextStyle(
-                      color: Colors.black,
+                    style: GoogleFonts.dmSerifDisplay(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -139,9 +138,9 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
 
                   Text(
                     widget.drink.description,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
+                    style: GoogleFonts.dmSerifDisplay(
+                      color: Colors.white,
+                      fontSize: 16,
                       height: 2,
                     ),
                   ),
@@ -162,11 +161,11 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Color(0xFFFFEBCD),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
+                    color: Colors.brown,
                     spreadRadius: 5,
                     blurRadius: 10,
                   ),
@@ -180,7 +179,7 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                   Container(
                     height: 5,
                     width: double.infinity,
-                    color: Colors.grey,
+                    color: Colors.brown[800],
                   ),
 
                   // AnimatedContainer untuk gambar barcode
@@ -190,10 +189,10 @@ class _DrinkDetailsPageState extends State<DrinkDetailsPage> {
                     height: isBarcodeVisible ? 200 : 0,
                     margin: const EdgeInsets.only(top: 10),
                     padding: const EdgeInsets.all(10),
-                    color: Colors.white,
+                    color: Color(0xFFFFEBCD),
                     child: isBarcodeVisible
                         ? Image.asset(
-                            'images/barcode/barcode1.jpg', // Sesuaikan dengan path gambar barcode
+                            'images/barcode/barcoderemovebg.png', // Sesuaikan dengan path gambar barcode
                             width: double.infinity,
                             fit: BoxFit.contain, // Menyesuaikan gambar agar tidak terpotong
                           )

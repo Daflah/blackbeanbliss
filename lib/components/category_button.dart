@@ -28,7 +28,7 @@ class CategoryButton extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.brown[400] : Colors.brown[300],
+          color: isSelected ? Color(0xFFFFEBCD) : Colors.brown[400],
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
@@ -37,7 +37,7 @@ class CategoryButton extends StatelessWidget {
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: isSelected ? Colors.white : Colors.white,
+              color: isSelected ? Colors.black : Colors.white,
             ),
           ),
         ),

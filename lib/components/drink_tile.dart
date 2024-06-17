@@ -19,7 +19,7 @@ class DrinkTile extends StatelessWidget {
         width: 250,
         height: 250,
         decoration: BoxDecoration(
-          color: Colors.brown[500],
+          color: Color(0xFFFFEBCD),
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.only(left: 12, right: 12),
@@ -40,7 +40,7 @@ class DrinkTile extends StatelessWidget {
               drink.name,
               style: GoogleFonts.dmSerifDisplay(
                 fontSize: 20,
-                color: Colors.white, // Set the text color to white
+                color: Colors.black, // Set the text color to white
               ),
             ),
 
@@ -57,7 +57,7 @@ class DrinkTile extends StatelessWidget {
                     '\Rp' + drink.price,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
 
@@ -70,7 +70,7 @@ class DrinkTile extends StatelessWidget {
                       ),
                       Text(
                         drink.rating,
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ],
                   )

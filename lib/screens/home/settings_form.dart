@@ -37,7 +37,7 @@ class _SettingsFormState extends State<SettingsForm> {
             child: Column(
               children: <Widget>[
                 const Text(
-                  'Update your brew settings.',
+                  'Update your brew preferences.',
                   style: TextStyle(fontSize: 18.0),
                 ),
                 const SizedBox(height: 20.0),
@@ -72,8 +72,7 @@ class _SettingsFormState extends State<SettingsForm> {
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.pink[400],
-                    onPrimary: Colors.white,
+                    foregroundColor: Colors.white, backgroundColor: Colors.brown[300],
                   ),
                   child: const Text(
                     'Update',

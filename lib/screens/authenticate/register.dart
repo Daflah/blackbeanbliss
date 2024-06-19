@@ -170,6 +170,15 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 70.0), // Space between form and footer text
+                        Text(
+                          'Developed by Dev on Singh',
+                          style: GoogleFonts.roboto(
+                            fontSize: 12.0,
+                            color: Colors.white54,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                 ],
               ),
             ),
